@@ -1,6 +1,12 @@
 const mychart = echarts.init(document.getElementById('europe'))
 
-$.getJSON('../Europe/Europe.json',function (europeData) {
-    europeData = europeData.map(function (serieData, idx) {
+$.getJSON('../Europe/Europe4.json',function (europeData) {
+    echarts.registerMap('europe',europeData)
+
+    mychart.setOption({
+        series:[{
+            type:'map',
+            map:'europe'
+        }]
     })
 })
