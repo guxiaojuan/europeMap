@@ -1,0 +1,16 @@
+{
+  "name": "map",
+  "version": "1.0.0",
+  "description": "欧洲地图",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "echarts": "^3.8.5",
+    "jquery": "^3.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
