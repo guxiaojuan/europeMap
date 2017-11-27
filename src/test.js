@@ -6,7 +6,10 @@ $.getJSON('../Europe/Europe4.json',function (europeData) {
     mychart.setOption({
         series:[{
             type:'map',
-            map:'europe'
+            map:'europe',
+            data:[{
+                name:'itly',
+            }]
         }]
     })
 })
