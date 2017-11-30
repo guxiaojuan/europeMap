@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Users Login In Europe</title>
+</head>
+<body>
+	<div id="container" style="width:400px;height:400px;"></div>
+    <script src="./dev/jquery.min.js"></script>
+    <script src="./dev/highcharts.js"></script>
+    <script src="./dev/map.js"></script>
+    <script src="./dev/proj4.js"></script>
+    <script src="./dev/Europe.js"></script>
+    <script>
+        var mapdata = Highcharts.maps["custom/europe"];
+        var points = [], options = {};
+        function getPoints(pointdata) {
+            var time = getCurrentTime();
+            return pointdata[time];
+        };
+        function getCurrentTime() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+            if(hours < 10 && hours >= 0) {
+                hours = '0' + hours;
+            }
+            if(minutes < 10 && minutes >= 0) {
+                minutes = '0' + minutes;
+            }
+            if(seconds < 10 && seconds >= 0) {
+                seconds = '0' + seconds;
+            }
+            return hours + ':' + minutes + ':' + seconds;
+        };
+        $.getJSON('./map/json/malta.json', function(pointdata) {
+            var clientWidth = window.screen.availWidth;
+            var clientHeight = window.screen.availHeight;
+            $("#container").width(clientWidth);
+            $("#container").height(clientHeight);
+            var points = getPoints(pointdata);
+            for(var i = 0; i < points.length; i++) {
+                var obj = points[i];
+                if(obj.value == 1) {
+                    obj.color = '#2987EB';
+                }else if(obj.value > 1 && obj.value < 4) {
+                    obj.color = '#0FD4D0';
+                }else if(obj.value >= 4) {
+                    obj.color = '#F9FAFC';
+                }
+                
+            }
+            var options = {
+                legend: {
+                    x: 0,
+                    y: 50,
+                    align: 'left',
+                    verticalAlign: 'top',
+                    itemStyle: {
+                        color: '#F9FAFC',
+                        fontSize: '15px',
+                    },
+                    itemHoverStyle: {
+                        color: '#F9FAFC',
+                        fontSize: '15px',
+                    },
+                    labelFormatter: function() {
+                        return  this.name;
+                    }
+                },
+                title: {
+                    text: '欧洲实时登录人数',
+                    style: {
+                        color: '#F9FAFC',
+                        fontSize: '25px',
+                        fontWeight: 'bold'
+                    },
+                },
+                tooltip: {
+                    formatter: function() {
+                        if(this.point.value) {
+                            return this.point.name + ': ' + this.point.value;
+                        }else {
+                            return this.point.name + ': 0';
+                        }
+                    }
+                },
+                credits: {
+                    enabled: false,
+                    href: 'http://www.500.com/',
+                    text: '500.com',
+                    mapTextFull: '500'
+                },
+                chart: {
+                    type: 'map',
+                    spacingBottom: 20,
+                    backgroundColor: '#333333',                  
+                },
+                mapNavigation: {
+                    enabled: true,
+                    buttonOptions: {
+                        verticalAlign: 'bottom'
+                    }
+                },
+                series: [{
+                    showInLegend: false,
+                    borderColor: '#2A282F',
+                    mapData: mapdata,
+                    nullColor: '#323C48',
+                    nullInteraction: true,
+                    data: points,
+                    joinBy: ['iso-a2','name']
+                }, {
+                    name: '强',
+                    color: '#F9FAFC',
+                    events: {
+                        legendItemClick: function(e) {
+                            return false; //禁用图例点击事件
+                        }
+                    },
+                },{
+                    name: '中',
+                    color: '#0FD4D0',
+                    events: {
+                        legendItemClick: function(e) {
+                            return false; //禁用图例点击事件
+                        }
+                    },
+                }, {
+                    name: '弱',
+                    color: '#2987EB',
+                    events: {
+                        legendItemClick: function(e) {
+                            return false; //禁用图例点击事件
+                        }
+                    },
+                }]
+            };
+            var map = Highcharts.mapChart('container', options);
+            setInterval(function() {
+                var pointsNew = getPoints(pointdata);
+                if(pointsNew) {
+                    if(pointsNew.length <= 0) {
+                        map.series[0].setData(points);
+                    }else {
+                        points = pointsNew;
+                        for(var i = 0; i < points.length; i++) {
+                            var obj = points[i];
+                            if(obj.value == 1) {
+                                obj.color = '#2987EB';
+                            }else if(obj.value > 1 && obj.value < 4) {
+                                obj.color = '#0FD4D0';
+                            }else if(obj.value >= 4) {
+                                obj.color = '#F9FAFC';
+                            }
+                        }
+                        map.series[0].setData(points);
+                    }
+                }
+            },1000);
+        });
+    </script>
+</body>
+</html>
