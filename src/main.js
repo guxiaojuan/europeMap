@@ -1,479 +1,940 @@
-var geoCoordMap = {
-    "æµ·é—¨":[121.15,31.89],
-    "é„‚å°”å¤šæ–¯":[109.781327,39.608266],
-    "æ‹›è¿œ":[120.38,37.35],
-    "èˆŸå±±":[122.207216,29.985295],
-    "é½é½å“ˆå°”":[123.97,47.33],
-    "ç›åŸ":[120.13,33.38],
-    "èµ¤å³°":[118.87,42.28],
-    "é’å²›":[120.33,36.07],
-    "ä¹³å±±":[121.52,36.89],
-    "é‡‘æ˜Œ":[102.188043,38.520089],
-    "æ³‰å·":[118.58,24.93],
-    "è±è¥¿":[120.53,36.86],
-    "æ—¥ç…§":[119.46,35.42],
-    "èƒ¶å—":[119.97,35.88],
-    "å—é€š":[121.05,32.08],
-    "æ‹‰è¨":[91.11,29.97],
-    "äº‘æµ®":[112.02,22.93],
-    "æ¢…å·":[116.1,24.55],
-    "æ–‡ç™»":[122.05,37.2],
-    "ä¸Šæµ·":[121.48,31.22],
-    "æ”€æèŠ±":[101.718637,26.582347],
-    "å¨æµ·":[122.1,37.5],
-    "æ‰¿å¾·":[117.93,40.97],
-    "å¦é—¨":[118.1,24.46],
-    "æ±•å°¾":[115.375279,22.786211],
-    "æ½®å·":[116.63,23.68],
-    "ä¸¹ä¸œ":[124.37,40.13],
-    "å¤ªä»“":[121.1,31.45],
-    "æ›²é–":[103.79,25.51],
-    "çƒŸå°":[121.39,37.52],
-    "ç¦å·":[119.3,26.08],
-    "ç“¦æˆ¿åº—":[121.979603,39.627114],
-    "å³å¢¨":[120.45,36.38],
-    "æŠšé¡º":[123.97,41.97],
-    "ç‰æºª":[102.52,24.35],
-    "å¼ å®¶å£":[114.87,40.82],
-    "é˜³æ³‰":[113.57,37.85],
-    "è±å·":[119.942327,37.177017],
-    "æ¹–å·":[120.1,30.86],
-    "æ±•å¤´":[116.69,23.39],
-    "æ˜†å±±":[120.95,31.39],
-    "å®æ³¢":[121.56,29.86],
-    "æ¹›æ±Ÿ":[110.359377,21.270708],
-    "æ­é˜³":[116.35,23.55],
-    "è£æˆ":[122.41,37.16],
-    "è¿äº‘æ¸¯":[119.16,34.59],
-    "è‘«èŠ¦å²›":[120.836932,40.711052],
-    "å¸¸ç†Ÿ":[120.74,31.64],
-    "ä¸œè":[113.75,23.04],
-    "æ²³æº":[114.68,23.73],
-    "æ·®å®‰":[119.15,33.5],
-    "æ³°å·":[119.9,32.49],
-    "å—å®":[108.33,22.84],
-    "è¥å£":[122.18,40.65],
-    "æƒ å·":[114.4,23.09],
-    "æ±Ÿé˜´":[120.26,31.91],
-    "è“¬è±":[120.75,37.8],
-    "éŸ¶å…³":[113.62,24.84],
-    "å˜‰å³ªå…³":[98.289152,39.77313],
-    "å¹¿å·":[113.23,23.16],
-    "å»¶å®‰":[109.47,36.6],
-    "å¤ªåŸ":[112.53,37.87],
-    "æ¸…è¿œ":[113.01,23.7],
-    "ä¸­å±±":[113.38,22.52],
-    "æ˜†æ˜":[102.73,25.04],
-    "å¯¿å…‰":[118.73,36.86],
-    "ç›˜é”¦":[122.070714,41.119997],
-    "é•¿æ²»":[113.08,36.18],
-    "æ·±åœ³":[114.07,22.62],
-    "ç æµ·":[113.52,22.3],
-    "å®¿è¿":[118.3,33.96],
-    "å’¸é˜³":[108.72,34.36],
-    "é“œå·":[109.11,35.09],
-    "å¹³åº¦":[119.97,36.77],
-    "ä½›å±±":[113.11,23.05],
-    "æµ·å£":[110.35,20.02],
-    "æ±Ÿé—¨":[113.06,22.61],
-    "ç« ä¸˜":[117.53,36.72],
-    "è‚‡åº†":[112.44,23.05],
-    "å¤§è¿":[121.62,38.92],
-    "ä¸´æ±¾":[111.5,36.08],
-    "å´æ±Ÿ":[120.63,31.16],
-    "çŸ³å˜´å±±":[106.39,39.04],
-    "æ²ˆé˜³":[123.38,41.8],
-    "è‹å·":[120.62,31.32],
-    "èŒ‚å":[110.88,21.68],
-    "å˜‰å…´":[120.76,30.77],
-    "é•¿æ˜¥":[125.35,43.88],
-    "èƒ¶å·":[120.03336,36.264622],
-    "é“¶å·":[106.27,38.47],
-    "å¼ å®¶æ¸¯":[120.555821,31.875428],
-    "ä¸‰é—¨å³¡":[111.19,34.76],
-    "é”¦å·":[121.15,41.13],
-    "å—æ˜Œ":[115.89,28.68],
-    "æŸ³å·":[109.4,24.33],
-    "ä¸‰äºš":[109.511909,18.252847],
-    "è‡ªè´¡":[104.778442,29.33903],
-    "å‰æ—":[126.57,43.87],
-    "é˜³æ±Ÿ":[111.95,21.85],
-    "æ³¸å·":[105.39,28.91],
-    "è¥¿å®":[101.74,36.56],
-    "å®œå®¾":[104.56,29.77],
-    "å‘¼å’Œæµ©ç‰¹":[111.65,40.82],
-    "æˆéƒ½":[104.06,30.67],
-    "å¤§åŒ":[113.3,40.12],
-    "é•‡æ±Ÿ":[119.44,32.2],
-    "æ¡‚æ—":[110.28,25.29],
-    "å¼ å®¶ç•Œ":[110.479191,29.117096],
-    "å®œå…´":[119.82,31.36],
-    "åŒ—æµ·":[109.12,21.49],
-    "è¥¿å®‰":[108.95,34.27],
-    "é‡‘å›":[119.56,31.74],
-    "ä¸œè¥":[118.49,37.46],
-    "ç‰¡ä¸¹æ±Ÿ":[129.58,44.6],
-    "éµä¹‰":[106.9,27.7],
-    "ç»å…´":[120.58,30.01],
-    "æ‰¬å·":[119.42,32.39],
-    "å¸¸å·":[119.95,31.79],
-    "æ½åŠ":[119.1,36.62],
-    "é‡åº†":[106.54,29.59],
-    "å°å·":[121.420757,28.656386],
-    "å—äº¬":[118.78,32.04],
-    "æ»¨å·":[118.03,37.36],
-    "è´µé˜³":[106.71,26.57],
-    "æ— é”¡":[120.29,31.59],
-    "æœ¬æºª":[123.73,41.3],
-    "å…‹æ‹‰ç›ä¾":[84.77,45.59],
-    "æ¸­å—":[109.5,34.52],
-    "é©¬éå±±":[118.48,31.56],
-    "å®é¸¡":[107.15,34.38],
-    "ç„¦ä½œ":[113.21,35.24],
-    "å¥å®¹":[119.16,31.95],
-    "åŒ—äº¬":[116.46,39.92],
-    "å¾å·":[117.2,34.26],
-    "è¡¡æ°´":[115.72,37.72],
-    "åŒ…å¤´":[110,40.58],
-    "ç»µé˜³":[104.73,31.48],
-    "ä¹Œé²æœ¨é½":[87.68,43.77],
-    "æ£åº„":[117.57,34.86],
-    "æ­å·":[120.19,30.26],
-    "æ·„åš":[118.05,36.78],
-    "éå±±":[122.85,41.12],
-    "æº§é˜³":[119.48,31.43],
-    "åº“å°”å‹’":[86.06,41.68],
-    "å®‰é˜³":[114.35,36.1],
-    "å¼€å°":[114.35,34.79],
-    "æµå—":[117,36.65],
-    "å¾·é˜³":[104.37,31.13],
-    "æ¸©å·":[120.65,28.01],
-    "ä¹æ±Ÿ":[115.97,29.71],
-    "é‚¯éƒ¸":[114.47,36.6],
-    "ä¸´å®‰":[119.72,30.23],
-    "å…°å·":[103.73,36.03],
-    "æ²§å·":[116.83,38.33],
-    "ä¸´æ²‚":[118.35,35.05],
-    "å—å……":[106.110698,30.837793],
-    "å¤©æ´¥":[117.2,39.13],
-    "å¯Œé˜³":[119.95,30.07],
-    "æ³°å®‰":[117.13,36.18],
-    "è¯¸æš¨":[120.23,29.71],
-    "éƒ‘å·":[113.65,34.76],
-    "å“ˆå°”æ»¨":[126.63,45.75],
-    "èŠåŸ":[115.97,36.45],
-    "èŠœæ¹–":[118.38,31.33],
-    "å”å±±":[118.02,39.63],
-    "å¹³é¡¶å±±":[113.29,33.75],
-    "é‚¢å°":[114.48,37.05],
-    "å¾·å·":[116.29,37.45],
-    "æµå®":[116.59,35.38],
-    "è†å·":[112.239741,30.335165],
-    "å®œæ˜Œ":[111.3,30.7],
-    "ä¹‰ä¹Œ":[120.06,29.32],
-    "ä¸½æ°´":[119.92,28.45],
-    "æ´›é˜³":[112.44,34.7],
-    "ç§¦çš‡å²›":[119.57,39.95],
-    "æ ªæ´²":[113.16,27.83],
-    "çŸ³å®¶åº„":[114.48,38.03],
-    "è±èŠœ":[117.67,36.19],
-    "å¸¸å¾·":[111.69,29.05],
-    "ä¿å®š":[115.48,38.85],
-    "æ¹˜æ½­":[112.91,27.87],
-    "é‡‘å":[119.64,29.12],
-    "å²³é˜³":[113.09,29.37],
-    "é•¿æ²™":[113,28.21],
-    "è¡¢å·":[118.88,28.97],
-    "å»ŠåŠ":[116.7,39.53],
-    "èæ³½":[115.480656,35.23375],
-    "åˆè‚¥":[117.27,31.86],
-    "æ­¦æ±‰":[114.31,30.52],
-    "å¤§åº†":[125.03,46.58]
-}
+var filepath = location.host.indexOf('boss')>0?'http://www.500boss.com/static/':'http://www.500.com/static/' ;
+var appCommonent =  {     //ËùÓĞ×é¼ş¹«ÓÃµÄÏîÄ¿
+    data:function () {
+        return {
+            inited:false,
+            total:1,  //ÁĞ±í¹«ÓÃÔªËØ
+            size:10,
+            start:this.getTime(new Date() -  7 * 24 * 3600 * 1000),
+            end:this.getTime(),
+            list:[],
+            page:1,
 
-var convertData = function (data) {
-    var res = []
-    for(var i = 0; i<data.length;i++){
-        var geoCoord = geoCoordMap[data[i].name]
-        if(geoCoord){
-            res.push({
-                name:data[i].name,
-                value:geoCoord.concat(data[i].value)
-            })
+            userinfo:'',
+            searchuser:'username',
+            searchtype:{'username':'ÓÃ»§Ãû',/*'nickname':'êÇ³Æ','idcardname':'ÕæÊµĞÕÃû'*/},
+
+            msg:{type:1,show:false,callback:null},
+            tip:{type:'',content:'',show:false},
+            alert:{type:'',content:'',show:false,callback:null},
+
+            username:'',
+        }
+    },
+    methods:{
+        getJson:function (param,callback) {
+            $.get('api/main.php',param,function(data){
+                    if(data==-100){ //ÓÃ»§Î´µÇÂ¼
+                        this.alert = {type:'confirm',content:'ÇëµÇÂ¼',show:true,callback:function (confirm) {
+                            if(confirm) location.href = 'http://' + location.host + '/login/login.php';
+                        }.bind(this)}
+                    }else if(data.code == '-1000'){
+                        this.alert = {type:'confirm',content:data.msg,show:true}
+                    }else{
+                        callback(data);
+                    }
+                }.bind(this),'json');
+        },
+        pagechangeCallback:function (n) { //Ã¿¸öÊµÀıÀïÃæ¶¼ÒªĞ´ ·â×°²»ÊÇÌ«ºÃ¡£ÒÔºóÌ½ÌÖ±ğµÄÊ¹ÓÃ·½·¨
+            this.page = n; //ÇĞ»»Ò³Ãæ¹¦ÄÜ
+            this.search();
+        },
+        setSearchParam:function () {
+            var param = this.$route.params.search.split('_');
+            for(var i=0;i<param.length;i+=2){
+                this[param[i]] = param[i+1];
+            }
+            if(this.start==''){
+                var start = new Date();
+                start.setDate(1);
+                this.start= start.formatDate('yyyy-MM-dd');
+            }
+            if(this.end==''){
+                var end =  new Date();
+                this.end= end.formatDate('yyyy-MM-dd');
+            }
+        },
+        sum:function (property) {
+            var s = 0;
+            for(var i=0;i<arguments.length;i++){
+                property = arguments[i];
+                if(this.list)this.list.forEach(function (v) {
+                    if(v[property]) s = s + parseFloat(v[property]);
+                });
+            }
+            return s;
+        },
+        getTime:function (date) {
+            var time;
+            if(!date){
+                time = new Date();
+            }else{
+                time = new Date(date);
+            }
+            var year = time.getFullYear(),
+                month = (time.getMonth() + 1) < 10 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1,
+                d = time.getDate() < 10 ? '0' + time.getDate() : time.getDate();
+
+            return year + '-' + month + '-' + d;
+        }
+    },
+    watch:{ //¼àÌıÊı¾İ±ä»¯
+        $route:function (n,v) { // ¼àÌıhash±ä»¯»ñÈ¡ºÍÖØÖÃÊı¾İ
+            console.log(this.$route.params.search);
+            if(this.$route.params.search){  //ÁĞ±í
+                this.setSearchParam();
+                this.getList();
+            }
+            if(this.$route.params.id){
+                this.id = this.$route.params.id;
+            }
+            if(this.$route.params.username){
+                this.username = this.$route.params.username;
+            }
+        }
+    },
+}
+//ÊµÀı ×¨¼ÒÉóºËÁĞ±íÒ³Ãæ
+var expertlistView = Vue.exten d({
+    mixins:[appCommonent],
+    template:'#expertlist',
+    mounted:function () {  //¹ÒÔØ³õÊ¼»¯
+        this.setSearchParam();
+        this.getList();
+    },
+    data:function () {
+        return {
+            status:0, // 0 Î´ÉóºË -1 Î´Í¨¹ı 1 ÒÑÍ¨¹ı
+            currentRow:{},
+            currentStatus:0,
+            showStatus:false,
+            sortType: false,
+            sortMod: '',
+            skills: '',
+            input:{
+                title: '',
+                content: '',
+                show: false,
+                callback:function () {}
+            },
+            userRefresh: false
+        }
+    },
+    methods: {
+        search:function () {
+            var sortType = this.sortType ? 'asc' : 'desc';
+            var param = ['status',this.status,'page',this.page,'sortmod',this.sortMod,'sorttype',sortType];
+            location.hash = '/expertlist/'+param.join('_');
+            this.userRefresh = false;
+        },
+        getList:function () {
+            this.getJson({mod:'expertlist',page:this.page,size:this.size,status:this.status,sortmod:this.sortMod,sorttype:this.sortType ? 'asc': 'desc'},function (data) {
+                this.total = Math.ceil(data.total/this.size);
+                this.list = data.list;
+                this.inited = true;
+            }.bind(this));
+        },
+        check:function (row,t) {
+            this.currentRow = row;
+            this.currentStatus = t;
+            if(t==0){
+                location.hash = '/expertdetail/'+row['username'];
+            }else{
+                this.showStatus = true;
+            }
+        },
+        closeStatusCallback:function (v) { //±ä±Èµ¯´°²¢Ë¢ĞÂÊı¾İ
+            this.showStatus = false;
+            if(v) this.getList();
+        },
+        listReverse:function(){
+            this.sortType = !this.sortType;
+            this.sortMod = 'publishtime';
+            var param = ['status',this.status,'page',this.page,'sortmod',this.sortMod,'sorttype',this.sortType ? 'asc': 'desc'];
+            location.hash = '/expertlist/'+param.join('_');
+            this.getList();
+        },
+        userResearch:function () {
+            if(!this.username){
+                this.alert=
+                    {
+                        type: 'alert-danger',content: '×¨¼ÒÃû×ÖÎ´ÌîĞ´', show: true, callback:function(){
+                        this.alert.show = false;
+                    }.bind(this)
+                    };
+                return false;
+            }
+            this.userRefresh = true;
+            this.getJson({mod:'getuserinfo',username:this.username},function (data) {
+                this.list = data.data;
+                this.total = 1;
+            }.bind(this));
+        },
+        passCode:function (username,flag) {
+            this.getJson({mod:'updateuserverify',username:username,status:flag},function (data) {
+                this.alert = {type:'alert',content:data.code==1?'²Ù×÷³É¹¦':('²Ù×÷Ê§°Ü'+data.msg),show:true,callback:function () {
+                        this.alert.show = false;
+                }.bind(this) }
+            }.bind(this));
+        },
+        skillClick: function(username,skill) {
+            if(this.status == 1){
+                this.input = {
+                    title: '¼¼ÄÜ', content: skill, show: true, callback: function (content) {
+                        this.updateSkill(username,content);
+                        this.input.show = false;
+                    }.bind(this)
+                }
+            }
+        },
+        updateSkill: function (username,skill) {
+            this.getJson({mod:'updateskill',username:username,skill:skill},function (data) {
+                if(data.code == 1){
+                    this.userRefresh ? this.userResearch() : this.getList();
+                }else{
+                    this.alert = {type:'alert',content:data.code==1?'¸üĞÂ³É¹¦':('¸üĞÂÊ§°Ü'+data.msg),show:true,callback:function () {
+                        this.alert.show = false;
+                    }.bind(this) }
+                }
+            }.bind(this));
+        }
+
+    },
+    filters:{
+        getButtonText:function (t) {
+            var text = {
+                '-1':'ÉóºË',
+                '0':'²é¿´',
+                '1':'È¡Ïû×Ê¸ñ'
+            }
+            return text[t];
+        }
+    },
+    watch:{
+        status:function () {
+            if(this.status == 1){
+                this.getJson({
+                    mod:'expertTime'
+                },function (data) {
+                    this.list.push(data);
+                }.bind(this))
+            }
         }
     }
-    return res
-}
+}) ;
 
-option={
-    backgroundColor: '#404a59',
-    title: {
-        text: 'å…¨å›½ä¸»è¦åŸå¸‚ç©ºæ°”è´¨é‡',
-        subtext: 'data from PM25.in',
-        sublink: 'http://www.pm25.in',
-        x:'center',
-        textStyle: {
-            color: '#fff'
+//×¨¼ÒÏêÇéÒ³Ãæ
+var expertdetailView = Vue.extend({
+    mixins:[appCommonent],
+    template:'#expertdetail',
+    mounted:function () {  //¹ÒÔØ³õÊ¼»¯
+        this.username = this.$route.params.username;
+    },
+    data:function () {
+        return {
+            detail:{
+            },
+            currentStatus:0,
+            showStatus:false,
         }
     },
-    tooltip: {
-        trigger: 'item',
-        formatter: function (params) {
-            return params.name + ' : ' + params.value[2];
-        }
-    },
-    legend: {
-        orient: 'vertical',
-        y: 'bottom',
-        x:'right',
-        data:['pm2.5'],
-        textStyle: {
-            color: '#fff'
-        }
-    },
-    visualMap: {
-        min: 0,
-        max: 200,
-        calculable: true,
-        inRange: {
-            color: ['#50a3ba', '#eac736', '#d94e5d']
+    methods:{
+        closeStatusCallback:function (v) { //±ä±Èµ¯´°²¢Ë¢ĞÂÊı¾İ
+            this.showStatus = false;
+            if(v) this.detail.status = v;
         },
-        textStyle: {
-            color: '#fff'
+        check:function (flag) {
+            this.showStatus = true;
+            if(flag){
+                this.currentStatus = 1;
+            }else{
+                this.currentStatus = this.detail['status']==1?-2:-1;
+            }
         }
     },
-    geo: {
-        map: 'china',
-        label: {
-            emphasis: {
+    watch: {
+        username:function (n,o) {
+            this.getJson({mod:'expertdetail',username:n},function (data) {
+                if(data){
+                    this.detail = data;
+                    if(this.detail.idimage){
+                        this.detail.idimage = this.detail.idimage.split(',');
+                        this.detail.idimage_positive = filepath+  this.detail.idimage[0];
+                        this.detail.idimage_opposite = filepath +  this.detail.idimage[1];
+                    }else {
+                        this.detail.idimage = ['',''];
+                    }
+                    if(this.detail.resource){
+                        this.detail.resource = filepath + this.detail.resource.split(',')[1];
+                    }
+                }
+            }.bind(this))
+        }
+    },
+    filters:{
+        getStatus:function (t) {
+            var text = {
+                '-2':'ÉóºËÍ¨¹ıºó±»È¡Ïû',
+                '-1':'ÉóºËÎ´Í¨¹ı',
+                '0':'Î´ÉóºË',
+                '1':'ÉóºËÍ¨¹ı'
+            }
+
+            return text[t];
+        },
+        getStatusClass:function (t) {
+            var text = {
+                '-2':'alert-danger',
+                '-1':'alert-danger',
+                '0':'alert-info',
+                '1':'alert-success'
+            }
+
+            return text[t];
+        },
+    }
+});
+
+//ÎÄÕÂÁĞ±íÒ³Ãæ           ¸Äµ½ÕâÀïÁË **********
+var articlelistView = Vue.extend({
+    mixins:[appCommonent],
+    template:'#articlelist',
+    mounted:function () {  //¹ÒÔØ³õÊ¼»¯
+        this.setSearchParam();
+        this.getList();
+    },
+    data:function () {
+        return {
+            userinfo:'',
+            searchuser:'username',
+            paytype: -1,
+            clickChangePaytype: false
+        }
+    },
+    methods: {
+        getList:function () {
+            this.getJson({mod:'articlelist',searchuser:this.searchuser,userinfo:this.userinfo,page:this.page,size:this.size,paytype:this.paytype,start:this.start,end:this.end},function (data) {
+                this.total = Math.ceil(data.total/this.size);
+                data.list.forEach(function (v,k) {
+                    v.checked =  false;
+                    data.list[k] = v;
+                })
+                this.list = data.list;
+                this.inited = true;
+            }.bind(this));
+        },
+        setJjstatus:function (id) {
+            var index = -1,value=-1;
+            if(this.list)this.list.forEach(function (v,k) {
+                if(v['aid']==id){
+                    value = v['jjstatus'] ;
+                    index = k;
+                }
+            })
+            if(index!=-1)this.getJson({mod:'jjstatus',id:id,jjstatus:(value==0?1:0)},function (d) {
+                if(d){
+                   this.list[index]['jjstatus'] =(value==0?1:0);
+                }
+            }.bind(this));
+        },
+        offLineArticle:function (id) {
+            this.getJson({mod:'offline',id:id},function (d) {
+                if(d){
+                    this.getList();
+                }
+            }.bind(this));
+        },
+        search:function () {
+            this.start =  $('#start').val();//Ê¹ÓÃÈÕÆÚ¿Ø¼şµ¼ÖÂmodelÊ§Ğ§ ´ı½â¾ö¡£
+            this.end = $('#end').val();
+            var param = ['paytype',this.paytype,'page',this.page,'userinfo',this.userinfo,'searchuser',this.searchuser,'start',this.start,'end',this.end];
+            location.hash = '/articlelist/'+param.join('_');
+        },
+        createArticle:function () {
+            var aid = [];
+            this.list.forEach(function (v) {
+                if(v.checked)aid.push(v.aid);
+            })
+            if(aid.length>0)this.getJson({mod:'createarticle',aid:aid.join(',')},function (data) {
+                this.alert = {type:'alert',content:data.code==1?'Éú³É³É¹¦':('Éú³ÉÊ§°Ü'+data.msg),show:true,callback:function () {
+                    this.alert.show = false;
+                }.bind(this) }
+            }.bind(this))
+        }
+    },
+    watch:{
+        paytype:function (n,old) {
+            if(this.clickChangePaytype){
+                this.page = 1;
+                this.search();
+            }
+        }
+    }
+}) ;
+
+var edit1,edit2;
+var articledetailView = Vue.extend({
+    mixins:[appCommonent],
+    template:'#articledetail',
+    mounted:function () {  //¹ÒÔØ³õÊ¼»¯
+        this.id = this.$route.params.id;
+
+        edit1 = new nicEditor();
+        edit1.setPanel('panel1');
+        edit1.addInstance('content1');
+
+        edit2 = new nicEditor();
+        edit2.setPanel('panel2');
+        edit2.addInstance('content2');
+
+    },
+    data:function () {
+        return {
+            id:0,
+            detail:{},
+            tip:{},
+        }
+    },
+    methods:{
+        saveContent:function () {
+            this.detail.freecontent = $('#content1').html();
+            this.detail.paycontent = $('#content2').html();
+            $.post('api/main.php?mod=savearticle',{id:this.id,title: this.detail.title,freecontent:this.detail.freecontent,paycontent:this.detail.paycontent},function (data) {
+                this.tip = {'type': data.code==1?'success':'fail','content': data.code==1?'±£´æ³É¹¦':'±£´æÊ§°Ü','show':true};
+            }.bind(this),'json');
+        }
+    },
+    watch: {
+        id:function (n,o) {
+            this.getJson({mod:'articledetail',id:n},function (data) {
+                if(data){
+                    this.detail = data;
+                   /* this.$nextTick(function () { //³õÊ¼»¯±à¼­Æ÷  ±à¼­Æ÷Óëvue¼æÈİĞÔµ÷Õû
+                        if(edit1)  edit1.removeInstance('content1');
+                        edit1= new nicEditor({buttonList : ['bold','italic','underline','left','center','right','justify','ol','ul','fontSize','fontFamily','fontFormat','indent','outdent','image','upload','link','unlink','forecolor','bgcolor','hr']}).panelInstance('content1');
+                        if(edit2)  edit1.removeInstance('content2');
+                        edit2 = new nicEditor({buttonList : ['bold','italic','underline','left','center','right','justify','ol','ul','fontSize','fontFamily','fontFormat','indent','outdent','image','upload','link','unlink','forecolor','bgcolor','hr']}).panelInstance('content2');
+                    })*/
+                }
+            }.bind(this))
+        }
+    },
+});
+
+
+var accountingdetailView = Vue.extend({
+    mixins:[appCommonent],
+    template:'#accountingdetail',
+    mounted:function () {  //¹ÒÔØ³õÊ¼»¯
+        this.id = this.$route.params.id;
+    },
+    data:function () {
+        return {
+            id:0,
+            list:[],
+            articleinfo:{},
+            tipcount:0,
+            tipmoney:0,
+            paymoney:0,
+            paycount:0,
+            platform:{pc:0,
+                ios:0,
+                android:0,
+                touch:0,
+            }
+        }
+    },
+    watch: {
+        id:function(n) {
+            this.getJson({mod:'accountingdetail',id:n},function (data) {
+                if(data){
+                    this.list = data.list;
+                    this.list.forEach(function (v) {
+                        if(v.paytype==1) {
+                            this.paymoney++;
+                            this.paymoney+= v.ordermoney;
+                        }
+                        else{
+                            this.tipcount++;
+                            this.tipmoney += parseFloat( v.ordermoney);
+                        }
+                        if(v.platform)this.platform[v.platform] ++ ;
+                    }.bind(this));
+                    this.articleinfo = data.articleinfo;
+                }
+            }.bind(this))
+        }
+    }
+});
+
+//²éÑ¯×÷ÕßÕËÎñ
+var accountinglistView = Vue.extend({
+    mixins:[appCommonent],
+    template:'#accountinglist',
+    mounted:function () {
+        this.setSearchParam();
+        this.getList();
+        this.initMonthList();
+    },
+    data:function () {
+        return {
+            type:1,  // 1 ÊÕÈë -1 Ö§³ö
+            monthList:[],
+            clickChangePaytype: false
+        }
+    },
+    methods: {
+        getList:function () {
+           this.getJson({mod:'accountinglist',page:this.page,size:this.size,type:this.type,start:this.start,end:this.end,searchuser:this.searchuser,userinfo:this.userinfo},function (data) {
+                this.total = Math.ceil(data.total/this.size);
+                this.list = data.list;
+                this.totalmoney = 0;
+                this.inited = true;
+            }.bind(this));
+        },
+        search:function () {
+            this.start =  $('#start').val();//Ê¹ÓÃÈÕÆÚ¿Ø¼şµ¼ÖÂmodelÊ§Ğ§ ´ı½â¾ö¡£
+            this.end = $('#end').val();
+            var param = ['type',this.type,'page',this.page,'nickname',this.nickname,'start',this.start,'end',this.end,'searchuser',this.searchuser,'userinfo',this.userinfo];
+            location.hash = '/accountinglist/'+param.join('_');
+        },
+        showExpert:function (id) {
+            location.hash = '/expertdetail/' + id;
+        },
+
+        initMonthList:function () {
+            var date = new Date();
+            var month = date.getMonth(),year = date.getFullYear();
+            month = month+1;
+            var m  = [];
+            for(var i=month - 5>0?month - 5:1;i<=month;i++){
+                i = ('0'+i).slice(-2);
+                m.push(year + '-' + i);
+            }
+            this.monthList = m.reverse();
+            if(this.monthList.length<3){
+                this.monthList.push(year-1+'-12',year-1+'-11');
+            }
+        },
+        saveData:function (v,event) {
+            v.paytime = $(event.target).parent().prev().prev().children().val();
+            var param = {
+                'mod':'saveaccounting',
+                'id':v.sid,
+                'payer':v.payer,
+                'paytime':v.paytime,
+            } 
+           this.getJson(param,function (data) {
+               this.tip = {'type': data.code=1?'success':'fail','content':data.code=1?'¸üĞÂ³É¹¦':'¸üĞÂÊ§°Ü',show:true};
+            }.bind(this));
+        },
+        createExcel:function (month) {
+            location.href ='api/excel/php?month='+month;
+        },
+        toDetail:function (id) {
+            location.hash = '/accountingdetail/'+id;
+        }
+    },
+    watch:{
+        type:function (n,old) {
+            if(this.clickChangePaytype){
+                this.page = 1;
+                this.search();
+            }
+        }
+    }
+}) ;
+
+//¹«¸æ¹ÜÀíÒ³Ãæ
+var noticelistView = Vue.extend({
+    mixins:[appCommonent],
+    template:'#noticelist',
+    mounted:function () {  //¹ÒÔØ³õÊ¼»¯
+        this.setSearchParam();
+        this.getList();
+    },
+    methods: {
+        getList:function () {
+            this.getJson({mod:'noticelist',page:this.page,size:this.size},function (data) {
+                this.total = Math.ceil(data.total/this.size);
+                this.list = data.list;
+                this.inited = true;
+            }.bind(this));
+        },
+        setSearchParam:function () {
+            var param = this.$route.params.search.split('_');
+            for(var i=0;i<param.length;i+=2){
+                this[param[i]] = param[i+1];
+            }
+        },
+        search:function () {
+            var param = ['page',this.page];
+            location.hash = '/noticelist/'+param.join('_');
+        },
+        deleteNotice:function (id) {
+            this.getJson({mod:'deletenotice','id':id},function (data) {
+                this.alert = {type:'alert',content:data.msg,show:true,callback:function () {
+                    this.alert.show = false;
+                    this.getList();
+                }.bind(this) }
+            }.bind(this));
+        }
+    },
+}) ;
+
+//¹«¸æ±à¼­Ò³Ãæ
+var edit3;
+var noticeeditView = Vue.extend({
+    mixins:[appCommonent],
+    template:'#noticeedit',
+    mounted:function () {
+        this.id = this.$route.params.id;
+        edit3 = new nicEditor();
+        edit3.setPanel('panel3');
+        edit3.addInstance('content3');
+    },
+    data:function () {
+        return {
+            id:0,
+            detail:{},
+        }
+    },
+    methods:{
+        save:function () {
+            this.detail.content =  $('#content3').html();
+            $.post('api/main.php?mod=noticeedit',{title:this.detail.title,content:this.detail.content},function (data) {
+                if(data.code==1) location.href = '#/noticelist/page_1';
+                this.tip = {'type': data.code=1?'success':'fail','content':data.msg,show:true};
+            }.bind(this),'json');
+        },
+    },
+    watch: {
+        id:function (n,o) {
+            this.getJson({mod:'noticedetail',id:n},function (data) {
+                if(data){
+                    this.detail = data;
+                }
+            }.bind(this))
+        }
+    },
+});
+
+
+
+//Õ½¼¨²éÑ¯Ò³Ãæ
+
+var targetListView = Vue.extend({
+    mixins:[appCommonent],
+    template: "#targetList",
+    data:function () {
+        return {
+            data: {
+                projectnum: 3,
+                ranktype: 'ÃüÖĞÂÊ',
+                isreverse: true
+            },
+            alert:{
+                type: 'alert-danger',
+                content: '',
                 show: false
-            }
-        },
-        itemStyle: {
-            normal: {
-                areaColor: '#323c48',
-                borderColor: '#111'
             },
-            emphasis: {
-                areaColor: '#2a333d'
+            list:[]
+        }
+    },
+    mounted:function () {
+
+        var time = new Date();
+        var timeEnd = this.getTime(),
+            timeStart = this.getTime(time.getTime() - 7 * 24 * 3600 * 1000);
+
+        $("#timeStart").val(timeStart);
+        $("#timeEnd").val(timeEnd);
+
+        this.getExpertRankList();
+    },
+    computed:{
+        getRankType: function () {
+            if(this.data.ranktype === 'ÃüÖĞÂÊ'){
+                return 'mzl';
+            }else if(this.data.ranktype === '»Ø±¨ÂÊ'){
+                return 'huibao';
+            }else{
+                return 'projectnum';
             }
         }
     },
-    series: [
-        {
-            name: 'pm2.5',
-            type: 'scatter',
-            coordinateSystem: 'geo',
-            data: convertData([
-                {name: "æµ·é—¨", value: 9},
-                {name: "é„‚å°”å¤šæ–¯", value: 12},
-                {name: "æ‹›è¿œ", value: 12},
-                {name: "èˆŸå±±", value: 12},
-                {name: "é½é½å“ˆå°”", value: 14},
-                {name: "ç›åŸ", value: 15},
-                {name: "èµ¤å³°", value: 16},
-                {name: "é’å²›", value: 18},
-                {name: "ä¹³å±±", value: 18},
-                {name: "é‡‘æ˜Œ", value: 19},
-                {name: "æ³‰å·", value: 21},
-                {name: "è±è¥¿", value: 21},
-                {name: "æ—¥ç…§", value: 21},
-                {name: "èƒ¶å—", value: 22},
-                {name: "å—é€š", value: 23},
-                {name: "æ‹‰è¨", value: 24},
-                {name: "äº‘æµ®", value: 24},
-                {name: "æ¢…å·", value: 25},
-                {name: "æ–‡ç™»", value: 25},
-                {name: "ä¸Šæµ·", value: 25},
-                {name: "æ”€æèŠ±", value: 25},
-                {name: "å¨æµ·", value: 25},
-                {name: "æ‰¿å¾·", value: 25},
-                {name: "å¦é—¨", value: 26},
-                {name: "æ±•å°¾", value: 26},
-                {name: "æ½®å·", value: 26},
-                {name: "ä¸¹ä¸œ", value: 27},
-                {name: "å¤ªä»“", value: 27},
-                {name: "æ›²é–", value: 27},
-                {name: "çƒŸå°", value: 28},
-                {name: "ç¦å·", value: 29},
-                {name: "ç“¦æˆ¿åº—", value: 30},
-                {name: "å³å¢¨", value: 30},
-                {name: "æŠšé¡º", value: 31},
-                {name: "ç‰æºª", value: 31},
-                {name: "å¼ å®¶å£", value: 31},
-                {name: "é˜³æ³‰", value: 31},
-                {name: "è±å·", value: 32},
-                {name: "æ¹–å·", value: 32},
-                {name: "æ±•å¤´", value: 32},
-                {name: "æ˜†å±±", value: 33},
-                {name: "å®æ³¢", value: 33},
-                {name: "æ¹›æ±Ÿ", value: 33},
-                {name: "æ­é˜³", value: 34},
-                {name: "è£æˆ", value: 34},
-                {name: "è¿äº‘æ¸¯", value: 35},
-                {name: "è‘«èŠ¦å²›", value: 35},
-                {name: "å¸¸ç†Ÿ", value: 36},
-                {name: "ä¸œè", value: 36},
-                {name: "æ²³æº", value: 36},
-                {name: "æ·®å®‰", value: 36},
-                {name: "æ³°å·", value: 36},
-                {name: "å—å®", value: 37},
-                {name: "è¥å£", value: 37},
-                {name: "æƒ å·", value: 37},
-                {name: "æ±Ÿé˜´", value: 37},
-                {name: "è“¬è±", value: 37},
-                {name: "éŸ¶å…³", value: 38},
-                {name: "å˜‰å³ªå…³", value: 38},
-                {name: "å¹¿å·", value: 38},
-                {name: "å»¶å®‰", value: 38},
-                {name: "å¤ªåŸ", value: 39},
-                {name: "æ¸…è¿œ", value: 39},
-                {name: "ä¸­å±±", value: 39},
-                {name: "æ˜†æ˜", value: 39},
-                {name: "å¯¿å…‰", value: 40},
-                {name: "ç›˜é”¦", value: 40},
-                {name: "é•¿æ²»", value: 41},
-                {name: "æ·±åœ³", value: 41},
-                {name: "ç æµ·", value: 42},
-                {name: "å®¿è¿", value: 43},
-                {name: "å’¸é˜³", value: 43},
-                {name: "é“œå·", value: 44},
-                {name: "å¹³åº¦", value: 44},
-                {name: "ä½›å±±", value: 44},
-                {name: "æµ·å£", value: 44},
-                {name: "æ±Ÿé—¨", value: 45},
-                {name: "ç« ä¸˜", value: 45},
-                {name: "è‚‡åº†", value: 46},
-                {name: "å¤§è¿", value: 47},
-                {name: "ä¸´æ±¾", value: 47},
-                {name: "å´æ±Ÿ", value: 47},
-                {name: "çŸ³å˜´å±±", value: 49},
-                {name: "æ²ˆé˜³", value: 50},
-                {name: "è‹å·", value: 50},
-                {name: "èŒ‚å", value: 50},
-                {name: "å˜‰å…´", value: 51},
-                {name: "é•¿æ˜¥", value: 51},
-                {name: "èƒ¶å·", value: 52},
-                {name: "é“¶å·", value: 52},
-                {name: "å¼ å®¶æ¸¯", value: 52},
-                {name: "ä¸‰é—¨å³¡", value: 53},
-                {name: "é”¦å·", value: 54},
-                {name: "å—æ˜Œ", value: 54},
-                {name: "æŸ³å·", value: 54},
-                {name: "ä¸‰äºš", value: 54},
-                {name: "è‡ªè´¡", value: 56},
-                {name: "å‰æ—", value: 56},
-                {name: "é˜³æ±Ÿ", value: 57},
-                {name: "æ³¸å·", value: 57},
-                {name: "è¥¿å®", value: 57},
-                {name: "å®œå®¾", value: 58},
-                {name: "å‘¼å’Œæµ©ç‰¹", value: 58},
-                {name: "æˆéƒ½", value: 58},
-                {name: "å¤§åŒ", value: 58},
-                {name: "é•‡æ±Ÿ", value: 59},
-                {name: "æ¡‚æ—", value: 59},
-                {name: "å¼ å®¶ç•Œ", value: 59},
-                {name: "å®œå…´", value: 59},
-                {name: "åŒ—æµ·", value: 60},
-                {name: "è¥¿å®‰", value: 61},
-                {name: "é‡‘å›", value: 62},
-                {name: "ä¸œè¥", value: 62},
-                {name: "ç‰¡ä¸¹æ±Ÿ", value: 63},
-                {name: "éµä¹‰", value: 63},
-                {name: "ç»å…´", value: 63},
-                {name: "æ‰¬å·", value: 64},
-                {name: "å¸¸å·", value: 64},
-                {name: "æ½åŠ", value: 65},
-                {name: "é‡åº†", value: 66},
-                {name: "å°å·", value: 67},
-                {name: "å—äº¬", value: 67},
-                {name: "æ»¨å·", value: 70},
-                {name: "è´µé˜³", value: 71},
-                {name: "æ— é”¡", value: 71},
-                {name: "æœ¬æºª", value: 71},
-                {name: "å…‹æ‹‰ç›ä¾", value: 72},
-                {name: "æ¸­å—", value: 72},
-                {name: "é©¬éå±±", value: 72},
-                {name: "å®é¸¡", value: 72},
-                {name: "ç„¦ä½œ", value: 75},
-                {name: "å¥å®¹", value: 75},
-                {name: "åŒ—äº¬", value: 79},
-                {name: "å¾å·", value: 79},
-                {name: "è¡¡æ°´", value: 80},
-                {name: "åŒ…å¤´", value: 80},
-                {name: "ç»µé˜³", value: 80},
-                {name: "ä¹Œé²æœ¨é½", value: 84},
-                {name: "æ£åº„", value: 84},
-                {name: "æ­å·", value: 84},
-                {name: "æ·„åš", value: 85},
-                {name: "éå±±", value: 86},
-                {name: "æº§é˜³", value: 86},
-                {name: "åº“å°”å‹’", value: 86},
-                {name: "å®‰é˜³", value: 90},
-                {name: "å¼€å°", value: 90},
-                {name: "æµå—", value: 92},
-                {name: "å¾·é˜³", value: 93},
-                {name: "æ¸©å·", value: 95},
-                {name: "ä¹æ±Ÿ", value: 96},
-                {name: "é‚¯éƒ¸", value: 98},
-                {name: "ä¸´å®‰", value: 99},
-                {name: "å…°å·", value: 99},
-                {name: "æ²§å·", value: 100},
-                {name: "ä¸´æ²‚", value: 103},
-                {name: "å—å……", value: 104},
-                {name: "å¤©æ´¥", value: 105},
-                {name: "å¯Œé˜³", value: 106},
-                {name: "æ³°å®‰", value: 112},
-                {name: "è¯¸æš¨", value: 112},
-                {name: "éƒ‘å·", value: 113},
-                {name: "å“ˆå°”æ»¨", value: 114},
-                {name: "èŠåŸ", value: 116},
-                {name: "èŠœæ¹–", value: 117},
-                {name: "å”å±±", value: 119},
-                {name: "å¹³é¡¶å±±", value: 119},
-                {name: "é‚¢å°", value: 119},
-                {name: "å¾·å·", value: 120},
-                {name: "æµå®", value: 120},
-                {name: "è†å·", value: 127},
-                {name: "å®œæ˜Œ", value: 130},
-                {name: "ä¹‰ä¹Œ", value: 132},
-                {name: "ä¸½æ°´", value: 133},
-                {name: "æ´›é˜³", value: 134},
-                {name: "ç§¦çš‡å²›", value: 136},
-                {name: "æ ªæ´²", value: 143},
-                {name: "çŸ³å®¶åº„", value: 147},
-                {name: "è±èŠœ", value: 148},
-                {name: "å¸¸å¾·", value: 152},
-                {name: "ä¿å®š", value: 153},
-                {name: "æ¹˜æ½­", value: 154},
-                {name: "é‡‘å", value: 157},
-                {name: "å²³é˜³", value: 169},
-                {name: "é•¿æ²™", value: 175},
-                {name: "è¡¢å·", value: 177},
-                {name: "å»ŠåŠ", value: 193},
-                {name: "èæ³½", value: 194},
-                {name: "åˆè‚¥", value: 229},
-                {name: "æ­¦æ±‰", value: 273},
-                {name: "å¤§åº†", value: 279}
-            ]),
-            symbolSize: 12,
-            label: {
-                normal: {
-                    show: false
-                },
-                emphasis: {
-                    show: false
+    methods:{
+        getExpertRankList:function () {
+            var starttime = $("#timeStart").val(),
+                endtime = $("#timeEnd").val();
+            if(!starttime){
+                this.alert=
+                    {
+                        type: 'alert-danger',content: '¿ªÊ¼Ê±¼äÎ´ÌîĞ´', show: true, callback:function(){
+                            this.alert.show = false;
+                        }.bind(this)
+                    };
+                return false;
+            }
+            if(!endtime){
+                this.alert={type: 'alert-danger',content: '½áÊøÊ±¼äÎ´ÌîĞ´', show: true,callback:function(){
+                    this.alert.show = false;
+                }.bind(this)
+                };
+                return false;
+            }
+            if(!this.data.projectnum){
+                this.alert={type: 'alert-danger',content: '×¨¼Ò×îÉÙµ¥ÊıÎ´ÌîĞ´', show: true,callback:function(){
+                    this.alert.show = false;
+                }.bind(this)
+                };
+                return false;
+            }
+            this.getJson({
+                'mod': 'getexpertranklist',
+                'starttime': starttime,
+                'endtime' : endtime,
+                'projectnum': this.data.projectnum,
+                'ranktype': this.getRankType,
+                'isreverse': this.data.isreverse ? 'True' : 'False'
+            },function (data) {
+                this.list = data.data;
+            }.bind(this));
+        },
+        listReverse: function () {
+            this.data.isreverse =  !this.data.isreverse;
+            this.getExpertRankList();
+        },
+        getExpertMatchList: function (event) {
+            this.$refs.childComponent.getExpertMatchList(event);
+        },
+        getTime:function (date) {
+            var time;
+            if(!date){
+                 time = new Date();
+            }else{
+                 time = new Date(date);
+            }
+            var year = time.getFullYear(),
+                month = (time.getMonth() + 1) < 10 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1,
+                d = time.getDate() < 10 ? '0' + time.getDate() : time.getDate();
+
+             return year + '-' + month + '-' + d;
+        }
+    }
+});
+
+
+//¶©µ¥²éÑ¯
+
+var orderQuery = Vue.extend({
+    mixins:[appCommonent],
+    template: "#orderquery",
+    data:function () {
+        return {
+            type: 1,
+            orderData: []
+        }
+    },
+    methods:{
+        search:function () {
+            if(this.type == 1){
+            if(!this.username){
+                this.alert=
+                    {
+                        type: 'alert-danger',content: 'ÓÃ»§ÃûÎ´ÌîĞ´', show: true, callback:function(){
+                        this.alert.show = false;
+                    }.bind(this)
+                    };
+                return false;
+            }
+            if(!this.start){
+                this.alert=
+                    {
+                        type: 'alert-danger',content: '¿ªÊ¼Ê±¼äÎ´ÌîĞ´', show: true, callback:function(){
+                        this.alert.show = false;
+                    }.bind(this)
+                    };
+                return false;
+            }
+            if(!this.end){
+                this.alert=
+                    {
+                        type: 'alert-danger',content: '½áÊøÊ±¼äÎ´ÌîĞ´', show: true, callback:function(){
+                        this.alert.show = false;
+                    }.bind(this)
+                    };
+                return false;
+            }
+            this.getJson({
+                'mod': 'getorderlist',
+                'username': this.username,
+                'starttime': this.start,
+                'endtime': this.end,
+                'page': this.page
+            },function (data) {
+                if(data.code === '1'){
+                    this.total = Math.ceil(data.total/10);
+                    this.orderData = data.data;
                 }
+            }.bind(this));
+        }
+        }
+    }
+});
+
+//×¨¼Ò¾ßÌå³¡´Î
+
+Vue.component('component-expermatchlist',Vue.extend({
+    mixins: [appCommonent],
+    template: '#expermatchlist',
+    data: function () {
+        return{
+            matchPage: 0,
+            type: 1,
+            show: false,
+            toastHeader: {
+                username: '',
+                nickname: '',
+                timeStart: '',
+                timeEnd: ''
             },
-            itemStyle: {
-                emphasis: {
-                    borderColor: '#fff',
-                    borderWidth: 1
+            matchList:[],
+            total: 0,
+            numList:[]
+        }
+    },
+    methods:{
+        getExpertMatchList: function(event){
+            this.toastHeader.username = $(event.currentTarget).attr('data-name').trim();
+            this.toastHeader.nickname = $(event.currentTarget).text().trim();
+            this.toastHeader.timeStart = $("#timeStart").val().trim();
+            this.toastHeader.timeEnd = $("#timeEnd").val().trim();
+            this.getJson({
+                'mod': 'getexpertmatchlist',
+                'username': this.toastHeader.username,
+                'starttime': this.toastHeader.timeStart,
+                'endtime': this.toastHeader.timeEnd,
+                'page': this.matchPage,
+                'type': this.type
+            },function(data){
+                this.matchList = data.data;
+                this.total = (parseInt(data.total) % 10) == 0 ? (parseInt(data.total)/10) : (Math.floor(parseInt(data.total)/10)+1);
+                if(this.total <= 10){
+                    this.numList = [];
+                    for(var i=1; i<=this.total; i++){
+                        this.numList.push(i);
+                    }
+                }else{
+                    this.numList = [1,2,3,4,5,6,7,8,9,this.total];
+                }
+                this.show = true;
+            }.bind(this));
+        },
+        getExpertData: function () {
+            this.getJson({
+                'mod': 'getexpertmatchlist',
+                'username': this.toastHeader.username,
+                'starttime': this.toastHeader.timeStart,
+                'endtime': this.toastHeader.timeEnd,
+                'page': this.page-1,
+                'type': this.type
+            },function(data){
+                this.matchList = data.data;
+            }.bind(this));
+        },
+        pageChange: function (event) {
+            this.page = parseInt($(event.currentTarget).text().trim());
+            this.getExpertData();
+            if(this.total >= 10){
+                if(this.page === 1 || this.page <= 5){
+                    this.numList = [1,2,3,4,5,6,7,8,9,this.total];
+                    return;
+                }
+                if(this.page === this.total || this.page >= this.total - 5){
+                    this.numList = [1];
+                    for(var i = this.total-8; i <= this.total; i++){
+                        this.numList.push(i);
+                    }
+                    return;
+                }
+                if(this.page >= 6 && this.page != this.total) {
+                    this.numList = [1];
+                    for (var j = this.page - 3; j <= this.page + 4; j++) {
+                        this.numList.push(j);
+                    }
+                    this.numList.push(this.total);
                 }
             }
+        },
+        expertInfo:function (item) {
+            var annInfo = item.info;
+            switch (parseInt(item.type)){
+                case 1:
+                    var infoArr = item.info.split("@");
+                    if(infoArr[0]){
+                        if(infoArr[0] === '3'){
+                            annInfo = 'Ê¤@' + infoArr[1];
+                        }else if(infoArr[0] === '1'){
+                            annInfo = 'Æ½@' + infoArr[1];
+                        }else{
+                            annInfo = '¸º@' + infoArr[1];
+                        }
+                    }
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    annInfo = item.info.split("@")[0] === '3' ? item.home + '@' + item.info.split("@")[1] : item.away + "@" + item.info.split("@")[1];
+                    break;
+                case 4:
+                    var arr =item.info.split("@");
+                    if(arr[0]){
+                        annInfo = arr[0] === '3' ? '´óÇò@' + arr[1] : 'Ğ¡Çò@' + arr[1];
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return annInfo;
         }
+    }
+}));
+var router = new VueRouter({
+    routes:[
+        {path:'/expertlist/:search',component:expertlistView},
+        {path:'/expertdetail/:username',component:expertdetailView},
+        {path:'/articlelist/:search',component:articlelistView},
+        {path:'/articledetail/:id',component:articledetailView},
+        {path:'/accountingdetail/:id',component:accountingdetailView},
+        {path:'/accountinglist/:search',component:accountinglistView},
+        {path:'/noticelist/:search',component:noticelistView},
+        {path:'/noticeedit/:id',component:noticeeditView},
+        {path:'/targetlist/',component:targetListView},
+        {path:'/orderquery/',component:orderQuery},
+        {path:'/',component:noticelistView},
     ]
-}
+});
 
-var mychart = echarts.init(document.getElementById('europe'))
-mychart.setOption(option)
+var main = new Vue({
+    router:router
+}).$mount('#main');
+
+
+
+ ///¹¤¾ß
+ Date.prototype.Format = function (fmt) { //author: meizz
+     var o = {
+         "M+": this.getMonth() + 1, //ÔÂ·İ
+         "d+": this.getDate(), //ÈÕ
+         "h+": this.getHours(), //Ğ¡Ê±
+         "m+": this.getMinutes(), //·Ö
+         "s+": this.getSeconds(), //Ãë
+         "q+": Math.floor((this.getMonth() + 3) / 3), //¼¾¶È
+         "S": this.getMilliseconds() //ºÁÃë
+     };
+     if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+     for (var k in o)
+         if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+     return fmt;
+ }
